@@ -29,13 +29,13 @@ class HeaderNav extends Component {
           <header>
             {
               this.state.categories.map((item, index) => {
-                return <ItemNav item={item} >
+                return <ItemNav key={index} item={item}>
                   {
                     (item.sublevels) ? item.sublevels.map((item, index) => {
-                      return  <ItemNav item={item}>
+                      return <ItemNav key={index} item={item}>
                         {
                           (item.sublevels) ? item.sublevels.map((item, index)=>{
-                            return <ItemNav item={item}/>
+                            return <ItemNav key={index} item={item}/>
                           }) : null
                         }
                       </ItemNav>

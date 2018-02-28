@@ -8,36 +8,12 @@ class ItemNav extends Component {
     super(props);
   }
 
-  componentWillMount() {
-  }
-
-  // menu() {
-  //   let itemNav = [], str = '';
-  //   return this.props.categories.map((item, i) => {
-  //     str += `<p>${item.name}`;
-  //     item.sublevels.forEach((subitem, j) => {
-  //       str += `<p>${subitem.name}`;
-  //       subitem.sublevels.forEach((subitem2, k) => {
-  //         str += `<p>${subitem2.name}</p>`;
-  //       })
-  //       str+= '</p>';
-  //     })
-  //
-  //     str+= '</p>';
-  //     return str;
-  //   });
-  //
-  // }
-
   render() {
-    let item, subitem;
     return (
-      <p>
-      {this.props.item.name}
-      {
-        this.props.children
-        }
-      </p>
+      <ul><li>
+        <a href="#">{this.props.item.name}</a>
+        {this.props.children}
+      </li></ul>
     )
   }
 
