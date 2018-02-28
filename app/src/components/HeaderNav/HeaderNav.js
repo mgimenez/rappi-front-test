@@ -27,7 +27,23 @@ class HeaderNav extends Component {
     if (this.state.categories.length > 0) {
         return (
           <header>
-            <ItemNav categories={this.state.categories} />
+            {
+              this.state.categories.map((item, index) => {
+                return <ItemNav item={item} >
+                  {
+                    (item.sublevels) ? item.sublevels.map((item, index) => {
+                      return  <ItemNav item={item}>
+                        {
+                          (item.sublevels) ? item.sublevels.map((item, index)=>{
+                            return <ItemNav item={item}/>
+                          }) : null
+                        }
+                      </ItemNav>
+                    })  : null
+                  }
+                </ItemNav>
+              })
+            }
           </header>
         )
     } else {
