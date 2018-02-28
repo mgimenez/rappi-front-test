@@ -12,12 +12,24 @@ class ItemNav extends Component {
   }
 
   render() {
-    this.props.categories.map((item, i) => {
-        console.log(item);
-        return <p>{item.name}</p>
-      })
-    }
-
+    return (
+      <div>
+        {
+          this.props.categories.map((item, i) => {
+            console.log('-', item.name);
+            if(item.sublevels.length > 0) {
+              item.sublevels.map((subitem, j) => {
+                console.log(subitem.name);
+              })
+            }
+            return (
+              <p key={item.id}>{item.name}</p>
+            )
+          })
+        }
+      </div>
+    )
+  }
 
 }
 
