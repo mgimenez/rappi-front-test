@@ -7,26 +7,12 @@ class HeaderNav extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      categories: []
-    }
-  }
-
-  componentWillMount() {
-    fetch('http://localhost:3000/categories')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.setState({ categories: data.categories })
-      })
   }
 
   renderSubMenu(item) {
     if (item.sublevels) {
       return item.sublevels.map((item, index) => {
-        return <ItemNav key={index} item={item} cls="sub-item">
+        return <ItemNav key={index} item={item} cls="sub-item" filterProducts={this.props.filterProducts}>
           {
             (item.sublevels) ? this.renderSubMenu(item.sublevels) : null
           }
@@ -35,27 +21,27 @@ class HeaderNav extends Component {
     } else {
       return item.map((item, index) => {
         if (item.sublevels) {
-          return <ItemNav key={index} item={item} cls="sub-item">
+          return <ItemNav key={index} item={item} cls="sub-item" filterProducts={this.props.filterProducts}>
             {
               this.renderSubMenu(item.sublevels)
             }
             </ItemNav>
         } else {
 
-          return <ItemNav key={index} item={item} cls="sub-item" />
+          return <ItemNav key={index} item={item} cls="sub-item" filterProducts={this.props.filterProducts} />
         }
       })
     }
   }
 
   render() {
-    if (this.state.categories.length > 0) {
+    if (this.props.categories.length > 0) {
         return (
           <nav>
             <ul>
               {
-                this.state.categories.map((item, index) => {
-                  return <ItemNav key={index} item={item} cls="main-item">
+                this.props.categories.map((item, index) => {
+                  return <ItemNav key={index} item={item} cls="main-item" filterProducts={this.props.filterProducts}>
                     {
                       this.renderSubMenu(item)
                     }

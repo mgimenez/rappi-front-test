@@ -6,12 +6,13 @@ class ItemNav extends Component {
 
   constructor(props) {
     super(props);
+
   }
 
   render() {
     return (
       <li className={this.props.cls}>
-        <a href="#">{this.props.item.name}</a>
+        <a href="#" onClick={() => this.props.filterProducts(this.props.item)}>{this.props.item.name}</a>
         {
           (this.props.children) ? <ul>{this.props.children}</ul> : null
         }

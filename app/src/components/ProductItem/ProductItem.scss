@@ -1,0 +1,14 @@
+.product-item {
+  background-color: #ccc;
+  padding: 10px;
+  margin: 10px;
+  display: block;
+  .product-name {
+    text-transform: capitalize;
+  }
+  p {
+    margin: 5px 0 5px 0;
+    color: #333;
+    display: block;
+  }
+}
