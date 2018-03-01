@@ -26,7 +26,7 @@ class HeaderNav extends Component {
   renderSubMenu(item) {
     if (item.sublevels) {
       return item.sublevels.map((item, index) => {
-        return <ItemNav key={index} item={item}>
+        return <ItemNav key={index} item={item} cls="sub-item">
           {
             (item.sublevels) ? this.renderSubMenu(item.sublevels) : null
           }
@@ -35,14 +35,14 @@ class HeaderNav extends Component {
     } else {
       return item.map((item, index) => {
         if (item.sublevels) {
-          return <ItemNav key={index} item={item}>
+          return <ItemNav key={index} item={item} cls="sub-item">
             {
               this.renderSubMenu(item.sublevels)
             }
             </ItemNav>
         } else {
 
-          return <ItemNav key={index} item={item} />
+          return <ItemNav key={index} item={item} cls="sub-item" />
         }
       })
     }
@@ -51,17 +51,19 @@ class HeaderNav extends Component {
   render() {
     if (this.state.categories.length > 0) {
         return (
-          <header>
-            {
-              this.state.categories.map((item, index) => {
-                return <ItemNav key={index} item={item}>
-                  {
-                    this.renderSubMenu(item)
-                  }
-                </ItemNav>
-              })
-            }
-          </header>
+          <nav>
+            <ul>
+              {
+                this.state.categories.map((item, index) => {
+                  return <ItemNav key={index} item={item} cls="main-item">
+                    {
+                      this.renderSubMenu(item)
+                    }
+                  </ItemNav>
+                })
+              }
+            </ul>
+          </nav>
         )
     } else {
       return <p>Cargando categorias</p>
