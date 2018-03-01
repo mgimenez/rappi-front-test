@@ -10,10 +10,12 @@ class ItemNav extends Component {
 
   render() {
     return (
-      <ul><li>
-        <a href="#">{this.props.item.name}</a>
-        {this.props.children}
-      </li></ul>
+      <ul>
+        <li>
+          <a href="#">{this.props.item.name}</a>
+          {this.props.children}
+        </li>
+      </ul>
     )
   }
 

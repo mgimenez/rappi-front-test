@@ -6,7 +6,6 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 
 ReactDOM.render(
   <div>
-    <h1>Hi</h1>
     <HeaderNav/>
   </div>,
   document.getElementById('root')

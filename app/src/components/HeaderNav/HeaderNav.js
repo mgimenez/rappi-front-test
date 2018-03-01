@@ -23,6 +23,31 @@ class HeaderNav extends Component {
       })
   }
 
+  renderSubMenu(item) {
+    if (item.sublevels) {
+      return item.sublevels.map((item, index) => {
+        return <ItemNav key={index} item={item}>
+          {
+            (item.sublevels) ? this.renderSubMenu(item.sublevels) : null
+          }
+          </ItemNav>
+      })
+    } else {
+      return item.map((item, index) => {
+        if (item.sublevels) {
+          return <ItemNav key={index} item={item}>
+            {
+              this.renderSubMenu(item.sublevels)
+            }
+            </ItemNav>
+        } else {
+
+          return <ItemNav key={index} item={item} />
+        }
+      })
+    }
+  }
+
   render() {
     if (this.state.categories.length > 0) {
         return (
@@ -31,15 +56,7 @@ class HeaderNav extends Component {
               this.state.categories.map((item, index) => {
                 return <ItemNav key={index} item={item}>
                   {
-                    (item.sublevels) ? item.sublevels.map((item, index) => {
-                      return <ItemNav key={index} item={item}>
-                        {
-                          (item.sublevels) ? item.sublevels.map((item, index)=>{
-                            return <ItemNav key={index} item={item}/>
-                          }) : null
-                        }
-                      </ItemNav>
-                    })  : null
+                    this.renderSubMenu(item)
                   }
                 </ItemNav>
               })
