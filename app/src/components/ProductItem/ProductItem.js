@@ -11,10 +11,10 @@ class ProductItem extends Component {
   render() {
     return (
       <li className="product-item">
-        <p className="product-name">Name: {this.props.product.name}</p>
+        <h4 className="product-name">{this.props.product.name}</h4>
         <p className="product-quantity">Quantity: {this.props.product.quantity}</p>
         <p className="product-price">Price: {this.props.product.price}</p>
-        <p className="product-available">Available: {this.props.product.available ? 'si' : 'no'}</p>
+        <p className="product-available">{this.props.product.available ? 'Disponible' : 'No Disponible'}</p>
       </li>
     )
   }

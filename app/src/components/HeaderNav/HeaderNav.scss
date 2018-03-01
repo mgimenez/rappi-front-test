@@ -2,6 +2,7 @@ nav {
   background-color: #333;
   ul {
     margin: 0;
+    padding: 0;
   }
 
   a {
@@ -23,6 +24,7 @@ nav {
     display: inline-block;
     padding: 10px;
     position: relative;
+    margin: 0 10px 0 0;
     .sub-item {
       padding: 10px;
       width: 100%;

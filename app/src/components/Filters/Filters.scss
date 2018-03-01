@@ -1,0 +1,45 @@
+.filters {
+  background-color: #999;
+  color: #fff;
+  font-weight: 100;
+  border-top: solid 1px #ccc;
+
+  .filters__title {
+    margin: 0;
+    padding: 10px;
+  }
+
+  .filters__group {
+    margin: 0 10px;
+    padding: 0;
+
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 10px 10px 10px 0;
+    }
+  }
+
+  .filters__price,
+  .filters__quantity {
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      margin: 0 0 10px 0;
+    }
+  }
+
+  label {
+    margin: 0 10px 0 0;
+
+  }
+
+  input {
+    margin: 0 10px 0 0;
+    border: none;
+    padding: 10px
+  }
+}

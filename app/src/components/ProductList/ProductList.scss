@@ -1,0 +1,12 @@
+.product-list {
+  .product-list__title {
+    margin: 0;
+    padding: 10px;
+    color: #fff;
+  }
+
+  .product-list__grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

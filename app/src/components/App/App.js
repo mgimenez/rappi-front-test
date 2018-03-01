@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import './App.scss';
 import HeaderNav from '../HeaderNav/HeaderNav';
 import ProductList from '../ProductList/ProductList';
+import Filters from '../Filters/Filters';
 
 class App extends Component {
 
@@ -53,7 +55,10 @@ class App extends Component {
     return (
       <div>
         <HeaderNav categories={this.state.categories} filterProducts={this.filterProducts} />
-        <ProductList products={this.state.productList} />
+        <main className="main-container">
+          <Filters />
+          <ProductList products={this.state.productList} />
+        </main>
       </div>
     )
   }
