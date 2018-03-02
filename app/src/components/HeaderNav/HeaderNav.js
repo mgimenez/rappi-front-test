@@ -12,7 +12,7 @@ class HeaderNav extends Component {
   renderSubMenu(item) {
     if (item.sublevels) {
       return item.sublevels.map((item, index) => {
-        return <ItemNav key={index} item={item} cls="sub-item" filterProducts={this.props.filterProducts}>
+        return <ItemNav key={index} item={item} cls="sub-item" getProductsByCategory={this.props.getProductsByCategory}>
           {
             (item.sublevels) ? this.renderSubMenu(item.sublevels) : null
           }
@@ -21,14 +21,14 @@ class HeaderNav extends Component {
     } else {
       return item.map((item, index) => {
         if (item.sublevels) {
-          return <ItemNav key={index} item={item} cls="sub-item" filterProducts={this.props.filterProducts}>
+          return <ItemNav key={index} item={item} cls="sub-item" getProductsByCategory={this.props.getProductsByCategory}>
             {
               this.renderSubMenu(item.sublevels)
             }
             </ItemNav>
         } else {
 
-          return <ItemNav key={index} item={item} cls="sub-item" filterProducts={this.props.filterProducts} />
+          return <ItemNav key={index} item={item} cls="sub-item" getProductsByCategory={this.props.getProductsByCategory} />
         }
       })
     }
@@ -41,7 +41,7 @@ class HeaderNav extends Component {
             <ul>
               {
                 this.props.categories.map((item, index) => {
-                  return <ItemNav key={index} item={item} cls="main-item" filterProducts={this.props.filterProducts}>
+                  return <ItemNav key={index} item={item} cls="main-item" getProductsByCategory={this.props.getProductsByCategory}>
                     {
                       this.renderSubMenu(item)
                     }
