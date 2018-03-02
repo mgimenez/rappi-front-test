@@ -17,7 +17,7 @@ class ProductList extends Component {
         <div className="product-list__grid">
           {
             this.props.products.map((item, index) => {
-              return <ProductItem key={index} product={item} />
+              return <ProductItem key={index} product={item} addToCart={this.props.addToCart} />
             })
           }
         </div>

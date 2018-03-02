@@ -14,10 +14,13 @@ class App extends Component {
       categories: [],
       products: [],
       productList: [],
+      cart: JSON.parse(localStorage.getItem('cart')) || [],
+      cartLength: localStorage.getItem('cartLength') || 0
     }
 
     this.getProductsByCategory = this.getProductsByCategory.bind(this);
     this.getProductsFiltered = this.getProductsFiltered.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentWillMount() {
@@ -145,14 +148,55 @@ class App extends Component {
     })
   }
 
+  addToCart(prod) {
+
+    let exist = false;
+
+    this.state.productList.find((item) => {
+      if (prod.id === item.id) {
+        item.quantity = item.quantity - 1;
+      }
+    })
+
+    this.state.cart.find((item) => {
+      if (prod.id === item.id) {
+        item.quantity = item.quantity + 1;
+        exist = true;
+        this.state.cartLength ++;
+      }
+    })
+
+    if (!exist) {
+      this.state.cart.push({
+        id: prod.id,
+        name: prod.name,
+        price: prod.price,
+        available: prod.available,
+        quantity: 1
+      });
+      this.state.cartLength ++;
+    }
+
+    this.setState({
+      productList: this.state.productList,
+      cart: this.state.cart,
+      cartLength: this.state.cartLength
+    })
+
+    localStorage.setItem('cart', JSON.stringify(this.state.cart));
+    localStorage.setItem('cartLength', this.state.cartLength);
+
+
+  }
+
 
   render() {
     return (
       <div>
-        <HeaderNav categories={this.state.categories} getProductsByCategory={this.getProductsByCategory} />
+        <HeaderNav categories={this.state.categories} getProductsByCategory={this.getProductsByCategory} cartLength={this.state.cartLength} />
         <main className="main-container">
           <Filters getProductsFiltered={this.getProductsFiltered} />
-          <ProductList products={this.state.productList} />
+          <ProductList products={this.state.productList} addToCart={this.addToCart} />
         </main>
       </div>
     )

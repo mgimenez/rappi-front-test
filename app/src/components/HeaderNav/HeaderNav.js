@@ -47,8 +47,10 @@ class HeaderNav extends Component {
                     }
                   </ItemNav>
                 })
+
               }
             </ul>
+            <a href="#" className="cart">Carrito ({this.props.cartLength})</a>
           </nav>
         )
     } else {
