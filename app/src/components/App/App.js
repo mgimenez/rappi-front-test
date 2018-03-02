@@ -192,7 +192,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <HeaderNav categories={this.state.categories} getProductsByCategory={this.getProductsByCategory} cartLength={this.state.cartLength} />
         <main className="main-container">
           <Filters getProductsFiltered={this.getProductsFiltered} />

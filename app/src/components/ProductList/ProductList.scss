@@ -1,12 +1,18 @@
+@import '../../styles/mixins.scss';
 .product-list {
+  @include respond-to('medium') {
+    width: 75%;
+  }
   .product-list__title {
     margin: 0;
     padding: 10px;
-    color: #fff;
+    color: #333;
   }
 
   .product-list__grid {
-    display: flex;
-    flex-wrap: wrap;
+    @include respond-to('medium') {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }

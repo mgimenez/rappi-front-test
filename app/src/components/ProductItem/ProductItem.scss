@@ -1,24 +1,28 @@
+@import '../../styles/mixins.scss';
 .product-item {
-  // background-color: #ccc;
   padding: 10px;
   margin: 10px;
   display: block;
-  width: 200px;
-  border: solid 1px #000;
+  border: solid 1px #c1c1c1;
   cursor: pointer;
+  color: #333;
+  font-weight: 100;
+  @include respond-to('medium') {
+    width: 200px;
+  }
   &:hover {
-    background-color: rgba(204, 204, 204, .5);
-    color: #333;
-    border-color: #fff;
+    border-color: #333;
 
     .product-name {
-      color: #fff;
+      color: #000;
     }
 
   }
   .product-name {
     margin-top: 0;
     text-transform: capitalize;
+    font-weight: 400;
+    font-size: 18px;
   }
   p {
     margin: 5px 0 5px 0;
