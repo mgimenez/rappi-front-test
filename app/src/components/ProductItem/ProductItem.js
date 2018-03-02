@@ -15,7 +15,7 @@ class ProductItem extends Component {
         <p className="product-quantity">Quantity: {this.props.product.quantity}</p>
         <p className="product-price">Price: {this.props.product.price}</p>
         <p className="product-available">{this.props.product.available ? 'Disponible' : 'No Disponible'}</p>
-        <a href="#" onClick={() => this.props.addToCart(this.props.product)}>Agregar al carrito</a>
+        {this.props.addToCart ? <a href="#" onClick={() => this.props.addToCart(this.props.product)}>Agregar al carrito</a> : <a href="#" onClick={() => this.props.removeToCart(this.props.product)}>Eliminar</a> }
       </li>
     )
   }

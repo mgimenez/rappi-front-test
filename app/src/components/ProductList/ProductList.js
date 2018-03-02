@@ -13,11 +13,12 @@ class ProductList extends Component {
   render() {
     return (
       <div className="product-list">
-        <h3 className="product-list__title">Productos </h3>
+        {this.props.showTitle ? <h3 className="product-list__title">Productos </h3> : null}
+
         <div className="product-list__grid">
           {
             this.props.products.map((item, index) => {
-              return <ProductItem key={index} product={item} addToCart={this.props.addToCart} />
+              return <ProductItem key={index} product={item} addToCart={this.props.addToCart} removeToCart={this.props.removeToCart} />
             })
           }
         </div>

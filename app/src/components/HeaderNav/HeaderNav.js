@@ -2,6 +2,7 @@ import './HeaderNav.scss';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ItemNav from '../ItemNav/ItemNav.js';
+import Cart from '../Cart/Cart';
 
 class HeaderNav extends Component {
 
@@ -50,7 +51,7 @@ class HeaderNav extends Component {
 
               }
             </ul>
-            <a href="#" className="cart">Carrito ({this.props.cartLength})</a>
+            <Cart cls="cart" cartLength={this.props.cartLength} cart={this.props.cart} removeToCart={this.props.removeToCart} />
           </nav>
         )
     } else {

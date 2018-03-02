@@ -1,0 +1,45 @@
+@import '../../styles/mixins.scss';
+.modal-cart {
+  position: relative;
+
+  .btn-close {
+    position: absolute;
+    text-indent: -99999px;
+    right: 0;
+    top: 0;
+    opacity: 0.3;
+    width: 15px;
+    height: 15px;
+    @include respond-to('medium') {
+      width: 32px;
+      height: 32px;
+    }
+    &:before,
+    &:after {
+      position: absolute;
+      left: 15px;
+      content: ' ';
+      width: 2px;
+      background-color: #333;
+      height: 15px;
+      @include respond-to('medium') {
+        height: 33px;
+      }
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .modal-title {
+    margin: 0;
+    font-weight: 400;
+  }
+}

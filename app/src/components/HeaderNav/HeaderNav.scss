@@ -70,6 +70,7 @@ nav {
   }
 
   .cart {
+    display: inline-block;
     @include respond-to('medium') {
       position: absolute;
       top: 10px;
