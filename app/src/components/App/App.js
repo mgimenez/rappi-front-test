@@ -17,7 +17,7 @@ class App extends Component {
     }
 
     this.getProductsByCategory = this.getProductsByCategory.bind(this);
-    this.getProductsFiltred = this.getProductsFiltred.bind(this);
+    this.getProductsFiltered = this.getProductsFiltered.bind(this);
   }
 
   componentWillMount() {
@@ -42,64 +42,64 @@ class App extends Component {
 
 
   getProductsByCategory(item) {
-    var filtred = [];
+    var filtered = [];
     this.state.products.filter((product) => {
-      if (item.id === product.sublevel_id) filtred.push(product);
+      if (item.id === product.sublevel_id) filtered.push(product);
     })
 
     this.setState({
-      productList: filtred
+      productList: filtered
     })
   }
 
-  getProductsFiltred(orderBy, filterAvailable, filterMinPrice, filterMaxPrice, filterQuantity) {
-    let filtred = [];
+  getProductsFiltered(orderBy, filterAvailable, filterMinPrice, filterMaxPrice, filterQuantity) {
+    let filtered = [];
 
     if (filterAvailable) {
-      var filtredAvailable = [];
+      var filteredAvailable = [];
       this.state.products.filter((product) => {
-        (filterAvailable === product.available) ? filtredAvailable.push(product) : null;
+        (filterAvailable === product.available) ? filteredAvailable.push(product) : null;
       })
-      filtred = filtredAvailable;
+      filtered = filteredAvailable;
     } else {
-      filtred = this.state.products;
+      filtered = this.state.products;
     }
 
     if(filterMinPrice) {
-      var filtredMinPrice = [];
-      filtred.filter((product) => {
+      var filteredMinPrice = [];
+      filtered.filter((product) => {
         let price = parseFloat(product.price.replace( /^\D+/g, '').replace(',', '.')),
             minPrice = filterMinPrice.replace(',', '.');
 
-        (price > minPrice) ? filtredMinPrice.push(product) : null;
+        (price > minPrice) ? filteredMinPrice.push(product) : null;
       })
-      filtred = filtredMinPrice;
+      filtered = filteredMinPrice;
     }
 
     if(filterMaxPrice) {
-      var filtredMaxPrice = [];
-      filtred.filter((product) => {
+      var filteredMaxPrice = [];
+      filtered.filter((product) => {
         let price = parseFloat(product.price.replace( /^\D+/g, '').replace(',', '.')),
             maxPrice = filterMaxPrice.replace(',', '.');
 
-        (price < maxPrice) ? filtredMaxPrice.push(product) : null;
+        (price < maxPrice) ? filteredMaxPrice.push(product) : null;
       })
-      filtred = filtredMaxPrice;
+      filtered = filteredMaxPrice;
     }
 
     if(filterQuantity) {
-      var filtredQuantity = [];
-      filtred.filter((product) => {
-        (product.quantity >= parseInt(filterQuantity)) ? filtredQuantity.push(product) : null;
+      var filteredQuantity = [];
+      filtered.filter((product) => {
+        (product.quantity >= parseInt(filterQuantity)) ? filteredQuantity.push(product) : null;
       })
-      filtred = filtredQuantity;
+      filtered = filteredQuantity;
     }
 
     if(orderBy !== 'default') {
       let ordered = [];
       if (orderBy === 'minPrice') {
         let orderedMinPrice = [];
-        orderedMinPrice = filtred.sort(function(a, b) {
+        orderedMinPrice = filtered.sort(function(a, b) {
           return parseFloat(a.price.replace( /^\D+/g, '').replace(',', '.')) - parseFloat(b.price.replace( /^\D+/g, '').replace(',', '.'));
         });
         ordered = orderedMinPrice;
@@ -107,7 +107,7 @@ class App extends Component {
 
       if (orderBy === 'mayPrice') {
         let orderedMaxPrice = [];
-        orderedMaxPrice = filtred.sort(function(a, b) {
+        orderedMaxPrice = filtered.sort(function(a, b) {
           return parseFloat(b.price.replace( /^\D+/g, '').replace(',', '.') - parseFloat(a.price.replace( /^\D+/g, '').replace(',', '.')));
         });
         ordered = orderedMaxPrice;
@@ -115,7 +115,7 @@ class App extends Component {
 
       if (orderBy === 'minQuantity') {
         let orderedMinQuantity = [];
-        orderedMinQuantity = filtred.sort(function(a, b) {
+        orderedMinQuantity = filtered.sort(function(a, b) {
           return parseFloat(a.quantity - b.quantity);
         });
         ordered = orderedMinQuantity;
@@ -123,7 +123,7 @@ class App extends Component {
 
       if (orderBy === 'mayQuantity') {
         let orderedMayQuantity = [];
-        orderedMayQuantity = filtred.sort(function(a, b) {
+        orderedMayQuantity = filtered.sort(function(a, b) {
           return parseFloat(b.quantity - a.quantity);
         });
         ordered = orderedMayQuantity;
@@ -131,17 +131,17 @@ class App extends Component {
 
       if (orderBy === 'available') {
         let orderedAvailable = [];
-        orderedAvailable = filtred.sort(function(a, b) {
+        orderedAvailable = filtered.sort(function(a, b) {
           return parseFloat(b.available - a.available);
         });
         ordered = orderedAvailable;
       }
 
-      filtred = ordered;
+      filtered = ordered;
     }
 
     this.setState({
-      productList: filtred
+      productList: filtered
     })
   }
 
@@ -151,7 +151,7 @@ class App extends Component {
       <div>
         <HeaderNav categories={this.state.categories} getProductsByCategory={this.getProductsByCategory} />
         <main className="main-container">
-          <Filters getProductsFiltred={this.getProductsFiltred} />
+          <Filters getProductsFiltered={this.getProductsFiltered} />
           <ProductList products={this.state.productList} />
         </main>
       </div>

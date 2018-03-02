@@ -21,7 +21,7 @@ class Filters extends Component {
       [key]: value
     }, () => {
       let {orderBy, filterAvailable, filterMinPrice, filterMaxPrice, filterQuantity} = this.state;
-      this.props.getProductsFiltred(orderBy, filterAvailable, filterMinPrice, filterMaxPrice, filterQuantity);
+      this.props.getProductsFiltered(orderBy, filterAvailable, filterMinPrice, filterMaxPrice, filterQuantity);
     })
 
   }
