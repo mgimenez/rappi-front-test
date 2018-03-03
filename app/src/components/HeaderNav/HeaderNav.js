@@ -51,7 +51,7 @@ class HeaderNav extends Component {
 
               }
             </ul>
-            <Cart cls="cart" cartLength={this.props.cartLength} cart={this.props.cart} removeToCart={this.props.removeToCart} />
+            <Cart cls="cart" cartLength={this.props.cartLength} cart={this.props.cart} removeToCart={this.props.removeToCart} addToCart={this.props.addToCart} buy={this.props.buy} />
           </nav>
         )
     } else {

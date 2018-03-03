@@ -12,8 +12,8 @@ class App extends Component {
 
     this.state = {
       categories: [],
-      products: [],
-      productList: [],
+      products: JSON.parse(localStorage.getItem('products')) || [],
+      productList: JSON.parse(localStorage.getItem('productList')) || [],
       cart: JSON.parse(localStorage.getItem('cart')) || [],
       cartLength: localStorage.getItem('cartLength') || 0
     }
@@ -22,6 +22,7 @@ class App extends Component {
     this.getProductsFiltered = this.getProductsFiltered.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.removeToCart = this.removeToCart.bind(this);
+    this.buy = this.buy.bind(this);
   }
 
   componentWillMount() {
@@ -34,14 +35,19 @@ class App extends Component {
         this.setState({ categories: data.categories })
       })
 
-    fetch('http://localhost:3000/products')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.setState({ products: data.products })
-        this.setState({ productList: data.products })
-      })
+    if (!localStorage.getItem('productList')) {
+      fetch('http://localhost:3000/products')
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          this.setState({ products: data.products })
+          this.setState({ productList: data.products })
+          localStorage.setItem('products', JSON.stringify(this.state.products));
+          localStorage.setItem('productList', JSON.stringify(this.state.products));
+        })
+
+    }
   }
 
 
@@ -186,24 +192,34 @@ class App extends Component {
 
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
     localStorage.setItem('cartLength', this.state.cartLength);
+    localStorage.setItem('productList', JSON.stringify(this.state.productList));
 
   }
 
-  removeToCart(prod) {
+  removeToCart(prod, quantity) {
+    this.state.cart.map((item, index) => {
 
-    let exist = false;
-
-    this.state.productList.find((item) => {
       if (prod.id === item.id) {
-        item.quantity = item.quantity + 1;
-      }
-    })
+        if (item.quantity === 1 || quantity) {
+          this.state.cartLength = this.state.cartLength - item.quantity;
+          this.state.cart.splice(index, 1);
 
-    this.state.cart.find((item) => {
-      if (prod.id === item.id) {
-        item.quantity = item.quantity - 1;
-        exist = true;
-        this.state.cartLength --;
+          this.state.productList.find((itemList) => {
+            if(itemList.id === item.id) {
+              itemList.quantity = itemList.quantity + item.quantity;
+            }
+          })
+
+        } else {
+          item.quantity = item.quantity - 1;
+          this.state.cartLength --;
+          this.state.productList.find((item) => {
+            if (prod.id === item.id) {
+              item.quantity = item.quantity + 1;
+            }
+          })
+        }
+
       }
     })
 
@@ -215,16 +231,29 @@ class App extends Component {
 
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
     localStorage.setItem('cartLength', this.state.cartLength);
+    localStorage.setItem('productList', JSON.stringify(this.state.productList));
+  }
+
+  buy() {
+
+    this.setState({
+      cart: [],
+      cartLength: 0
+    }, () => {
+
+      localStorage.setItem('cart', JSON.stringify(this.state.cart));
+      localStorage.setItem('cartLength', this.state.cartLength);
+    })
   }
 
 
   render() {
     return (
       <div className="container">
-        <HeaderNav categories={this.state.categories} getProductsByCategory={this.getProductsByCategory} cartLength={this.state.cartLength} cart={this.state.cart} removeToCart={this.removeToCart} />
+        <HeaderNav categories={this.state.categories} getProductsByCategory={this.getProductsByCategory} cartLength={this.state.cartLength} cart={this.state.cart} addToCart={this.addToCart} removeToCart={this.removeToCart} buy={this.buy} />
         <main className="main-container">
           <Filters getProductsFiltered={this.getProductsFiltered} />
-          <ProductList products={this.state.productList} addToCart={this.addToCart} showTitle="true" />
+          <ProductList products={this.state.productList} addToCart={this.addToCart} context="list" />
         </main>
       </div>
     )

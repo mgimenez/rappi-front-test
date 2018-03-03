@@ -13,12 +13,12 @@ class ProductList extends Component {
   render() {
     return (
       <div className="product-list">
-        {this.props.showTitle ? <h3 className="product-list__title">Productos </h3> : null}
+        {this.props.context === 'list' ? <h3 className="product-list__title">Productos </h3> : null}
 
         <div className="product-list__grid">
           {
             this.props.products.map((item, index) => {
-              return <ProductItem key={index} product={item} addToCart={this.props.addToCart} removeToCart={this.props.removeToCart} />
+              return <ProductItem key={index} product={item} addToCart={this.props.addToCart} removeToCart={this.props.removeToCart} context={this.props.context} />
             })
           }
         </div>

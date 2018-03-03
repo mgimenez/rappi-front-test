@@ -40,8 +40,16 @@ class Cart extends Component {
           <div className="modal-cart">
             <h2 className="modal-title">Productos Agregados</h2>
             <a href="#" onClick={this.closeModal} className="btn-close">close</a>
+            {
+              this.props.cart.length ?
+                <div>
+                  <ProductList products={this.props.cart} removeToCart={this.props.removeToCart} addToCart={this.props.addToCart} />
+                  <a href="#" className="btn-buy" onClick={() => this.props.buy()}>Comprar</a>
+                </div>
 
-            <ProductList products={this.props.cart} removeToCart={this.props.removeToCart} />
+              :
+                <p>No hay productos agregados</p>
+            }
           </div>
 
         </Modal>
